@@ -20,6 +20,39 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Commits and lint
+
+This project uses **Husky** (Git hooks), **Commitizen** (commit message wizard), and **Commitlint** (Conventional Commits validation).
+
+### Commitizen
+
+- **`npm run commit`** — runs the interactive wizard to write the commit message (type, scope, description, body, breaking changes, etc.).
+- **`npm run commit:retry`** — retries after a failed commit (e.g. due to a commitlint error).
+
+Required format: `type(scope?): description` (e.g. `feat: add login`, `fix(api): handle timeout`).
+
+### Running Commitizen with `git commit`
+
+A Git alias can be set so that **`git commit`** (without `-m`) runs the Commitizen wizard. Run once:
+
+```bash
+npm run prepare:git
+```
+
+Then:
+
+- **`git commit`** (without `-m`) → runs the Commitizen wizard (requires a real terminal with TTY).
+- **`git commit -m "message"`** → performs a normal commit.
+
+In terminals without a TTY (e.g. some IDE integrated terminals), use **`npm run commit`** instead of `git commit`.
+
+### Husky
+
+- **Pre-commit** — runs `lint-staged` (ESLint and Prettier on staged files).
+- **Commit-msg** — validates the message with Commitlint (Conventional Commits).
+
+Recommended flow: `git add .` → `npm run commit` (or `git commit` in a real terminal) → hooks run lint and validation.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
